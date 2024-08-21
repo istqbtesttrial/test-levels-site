@@ -1,26 +1,52 @@
 import React, { useState } from 'react';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import Editor from 'react-simple-code-editor';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism-tomorrow.css';
 
 function AcceptanceTest() {
+    const [code, setCode] = useState(`function validateLogin(username, password) {
+  if (username === 'admin' && password === 'password123') {
+    return 'Login Successful';
+  } else {
+    return 'Login Failed';
+  }
+}`);
+
     const [result, setResult] = useState('');
 
-    // User acceptance test based on requirements
-    const validateLogin = (username, password) => {
-        return username === 'admin' && password === 'password123' ? 'Login Successful' : 'Login Failed';
-    };
-
-    const handleTest = () => {
-        const acceptanceResult = validateLogin('admin', 'password123') === 'Login Successful' ? 'Success' : 'Fail';
-        setResult(acceptanceResult);
+    const handleRun = () => {
+        try {
+            const validateLogin = new Function('return ' + code)();
+            const testResult = validateLogin('admin', 'password123');
+            setResult(`Result: ${testResult}`);
+        } catch (error) {
+            setResult(`Error: ${error.message}`);
+        }
     };
 
     return (
         <div>
             <h2>Acceptance Test</h2>
-            <p>In this exercise, you will perform an acceptance test based on user requirements.</p>
-            <button onClick={handleTest}>Run Acceptance Test</button>
-            <p>Result: {result}</p>
-            <h3>Exercise:</h3>
-            <p>Modify the validation logic to simulate a requirement change or a security issue.</p>
+            <p>Edit and run the code below to test user login validation:</p>
+            <div className="editor-container">
+                <Editor
+                    value={code}
+                    onValueChange={(newCode) => setCode(newCode)}
+                    highlight={(code) => highlight(code, languages.js)}
+                    padding={10}
+                    className="code-editor"
+                    style={{
+                        fontFamily: '"Fira code", "Fira Mono", monospace',
+                        fontSize: 14
+                    }}
+                />
+            </div>
+            <button onClick={handleRun}>Run Code</button>
+            <div className="result">{result}</div>
+            <h3>Instructions:</h3>
+            <p>Try changing the username or password values to cause a login failure. For example, change <code>password123</code> to <code>wrongpassword</code>.</p>
         </div>
     );
 }
