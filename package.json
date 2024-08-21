@@ -1,0 +1,20 @@
+{
+  "name": "test-levels-site",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://username.github.io/test-levels-site",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
