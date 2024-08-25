@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/test-levels-site/static/css/main.c9935f73.css",
+    "main.js": "/test-levels-site/static/js/main.466dbc28.js",
+    "index.html": "/test-levels-site/index.html",
+    "main.c9935f73.css.map": "/test-levels-site/static/css/main.c9935f73.css.map",
+    "main.466dbc28.js.map": "/test-levels-site/static/js/main.466dbc28.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9935f73.css",
+    "static/js/main.466dbc28.js"
+  ]
+}
